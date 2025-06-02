@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bulut | Custom Discord Bot Developer</title>
+ <link rel="icon" href="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #27ae60;
+      --primary-hover: #219150;
+      --background-color: #fafafa;
+      --text-color-dark: #222;
+      --text-color-muted: #555;
+      --card-bg: #fff;
+      --border-radius: 14px;
+      --shadow-light: rgba(0, 0, 0, 0.07);
+      --shadow-strong: rgba(39, 174, 96, 0.4);
+      --navbar-height: 64px;
+      --transition-speed: 0.35s;
+      --max-width: 960px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', 'Poppins', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color-dark);
+      scroll-behavior: smooth;
+      padding-top: var(--navbar-height);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-speed);
+    }
+    a:hover,
+    a:focus {
+      color: var(--primary-hover);
+      outline: none;
+      text-decoration: underline;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--navbar-height);
+      background: var(--card-bg);
+      box-shadow: 0 4px 12px var(--shadow-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 1000;
+      backdrop-filter: saturate(180%) blur(8px);
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: var(--text-color-dark);
+      letter-spacing: 0.15em;
+      user-select: none;
+      cursor: default;
+      font-family: 'Poppins', sans-serif;
+      transition: color var(--transition-speed);
+    }
+    nav .logo:hover {
+      color: var(--primary-color);
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    nav ul li a {
+      color: var(--text-color-dark);
+      padding: 0.35rem 0;
+      border-bottom: 2px solid transparent;
+      transition: border-color var(--transition-speed), color var(--transition-speed);
+    }
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+      outline: none;
+    }
+
+    header {
+      max-width: var(--max-width);
+      margin: 4rem auto 2rem;
+      text-align: center;
+      padding: 0 1.5rem;
+      user-select: none;
+    }
+    header h1 {
+      font-weight: 800;
+      font-size: 3.5rem;
+      margin: 0;
+      letter-spacing: 0.1em;
+      color: var(--text-color-dark);
+      line-height: 1.1;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-weight: 400;
+      font-size: 1.25rem;
+      color: var(--text-color-muted);
+      font-style: italic;
+    }
+
+    main {
+      max-width: var(--max-width);
+      margin: 2rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+    main section {
+      margin-bottom: 4rem;
+    }
+    main h2 {
+      font-size: 2.3rem;
+      font-weight: 700;
+      color: var(--text-color-dark);
+      margin-bottom: 1.5rem;
+      border-bottom: 3px solid var(--primary-color);
+      padding-bottom: 0.4rem;
+      user-select: none;
+      letter-spacing: 0.03em;
+    }
+    main p {
+      font-size: 1.15rem;
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--text-color-muted);
+      line-height: 1.65;
+      user-select: none;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 2.5rem;
+      margin-top: 2rem;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      box-shadow: 0 6px 18px var(--shadow-light);
+      border-radius: var(--border-radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      user-select: none;
+      cursor: default;
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .feature-card:hover,
+    .feature-card:focus-within {
+      box-shadow: 0 12px 30px var(--shadow-strong);
+      transform: translateY(-6px);
+      outline: none;
+    }
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      filter: drop-shadow(0 2px 3px rgba(0,0,0,0.08));
+    }
+    .feature-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--text-color-dark);
+    }
+    .feature-desc {
+      font-size: 1.05rem;
+      color: var(--text-color-muted);
+      line-height: 1.5;
+    }
+
+    .btn-contact {
+      display: inline-block;
+      background: var(--primary-color);
+      color: white;
+      padding: 1.15rem 3.5rem;
+      font-weight: 700;
+      font-size: 1.25rem;
+      border-radius: var(--border-radius);
+      border: none;
+      box-shadow: 0 8px 24px rgba(39, 174, 96, 0.6);
+      cursor: pointer;
+      user-select: none;
+      transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.25s ease;
+      text-decoration: none;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .btn-contact:hover,
+    .btn-contact:focus {
+      background-color: var(--primary-hover);
+      box-shadow: 0 14px 40px rgba(39, 174, 96, 0.85);
+      outline: none;
+      transform: scale(1.07);
+    }
+
+    footer {
+      max-width: var(--max-width);
+      margin: 0 auto 3rem;
+      padding: 1rem 1.5rem;
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: var(--text-color-muted);
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px) {
+      nav ul {
+        gap: 1.3rem;
+      }
+      main h2 {
+        font-size: 1.9rem;
+      }
+      .btn-contact {
+        padding: 1rem 3rem;
+        font-size: 1.1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      nav {
+        padding: 0 1rem;
+      }
+      header h1 {
+        font-size: 2.7rem;
+      }
+      main h2 {
+        font-size: 1.7rem;
+      }
+      .features {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+      }
+      nav ul {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="logo" tabindex="0">Bulut</div>
+    <ul>
+      <li><a href="#home" tabindex="0">Home</a></li>
+      <li><a href="#services" tabindex="0">Services</a></li>
+      <li><a href="#contact" tabindex="0">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header id="home">
+    <h1>Bulut</h1>
+    <p>bulutdevelops - Custom Discord Bot Developer</p>
+  </header>
+
+  <main>
+    <section id="services" aria-label="Services offered by Bulut">
+      <h2>Custom Discord Bot Services</h2>
+      <p>
+        Hi, I'm Bulut! I specialize in creating custom Discord bots tailored to your community needs.
+        Whether you want moderation tools, fun commands, or integrations, I build bots that bring your server to life.
+        Let me help you automate, engage, and enhance your Discord experience seamlessly.
+      </p>
+
+      <div class="features">
+        <article class="feature-card" tabindex="0" aria-label="Moderation Bots">
+          <img class="feature-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js Logo" />
+          <h3 class="feature-title">Moderation Bots</h3>
+          <p class="feature-desc">Bots customized to keep your server safe with automod, bans, mutes, and logs.</p>
+        </article>
+        <article class="feature-card" tabindex="0" aria-label="Fun and Utility Bots">
+          <img class="feature-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript Logo" />
+          <h3 class="feature-title">Fun & Utility Bots</h3>
+          <p class="feature-desc">Adds memes, games, music, leveling, and more to boost community engagement.</p>
+        </article>
+        <article class="feature-card" tabindex="0" aria-label="Custom Integrations">
+          <img class="feature-icon" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg" alt="NPM Logo" />
+          <h3 class="feature-title">Custom Integrations</h3>
+          <p class="feature-desc">Connect your Discord server to APIs, databases, or other services for powerful automation.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" aria-label="Contact information">
+      <h2>Get In Touch</h2>
+      <p>I'm ready to help you craft the perfect Discord bot for your needs. Reach out to start a conversation!</p>
+      <a class="btn-contact" href="https://www.fiverr.com/bulutdevelops/create-a-custom-discord-bot-with-nodejs" aria-label="Contact Bulut via Email">Contact Me</a>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Bulut Devs | bulutdevelops@gmail.com | Fiverr: bulutdevelops
+  </footer>
+</body>
+</html>
